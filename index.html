@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phonebook</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h2>Phone Book</h2>
+    </header>
+    <form id="phonebook" autocomplete="off">
+      <label for="name">Name (2 words)</label>
+      <input type="text" name="name" id="name" />
+      <label for="number">Phone Number (07..)</label>
+      <input type="number" name="number" id="number" />
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" />
+      <button type="submit" id="submit">Add</button>
+    </form>
+    <table>
+      <thead>
+        <th>Full Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+      </thead>
+      <tbody id="users"></tbody>
+    </table>
+  </body>
+</html>
