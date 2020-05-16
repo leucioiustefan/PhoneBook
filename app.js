@@ -9,70 +9,109 @@ const regexEmail = /\S+@\S+\.\S+/;
 const regexNumber = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
 const users = [];
 
+class Users {
+  isValidUser = false;
+
+  constructor(name, phone, email) {
+    this.name = name;
+    this.phone = phone;
+    this.email = email;
+  }
+
+  _renderUser() {
+    tbodyUsersEl.insertAdjacentHTML(
+      'beforeend',
+      `
+        <tr>
+            <td>${this.name}</td>
+            <td>${this.phone}</td>
+            <td>${this.email}</td>
+            <td><a href="#" class="edit">Edit</a></td>
+            <td><a href="#" class="delete">Delete</a></td>
+        </tr>
+    `
+    );
+  }
+
+  validate() {
+    if (
+      this.name.trim() === '' ||
+      this.email.trim() === '' ||
+      this.phone.trim() === ''
+    ) {
+      alert('Fields cannot be empty!');
+      return;
+    } else if (!regexName.test(this.name)) {
+      alert('Please provide a valid name!');
+      resetName();
+      return;
+    } else if (!regexNumber.test(this.phone)) {
+      alert('Please provide a valid phone number!');
+      resetNumber();
+      return;
+    } else if (!regexEmail.test(this.email)) {
+      alert('Please provide a valid email!');
+      resetEmail();
+      return;
+    } else {
+      this._renderUser();
+      this.isValidUser = true;
+    }
+    return this.isValidUser;
+  }
+}
+
+class User extends Users {
+  constructor(name, phone, email) {
+    super(name, phone, email);
+  }
+
+  checkForDuplicates(obj1, obj2) {
+    if (
+      obj1.name === obj2.name ||
+      obj1.email === obj2.email ||
+      obj1.phone === obj2.phone
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
 const resetForm = () => {
   fullNameEl.value = '';
   phoneNumberEl.value = '';
   emailEl.value = '';
 };
 
-const addAndValidateUser = (userObj) => {
-  if (userObj.name.trim() === '' || userObj.email.trim() === '') {
-    alert('Please provide all the informations');
-    resetForm();
-    return;
-  } else if (!regexName.test(userObj.name)) {
-    alert('Please write a valid name');
-    userObj.name = '';
-    return;
-  } else if (!regexNumber.test(userObj.phoneNo)) {
-    alert('Not a valid number');
-    userObj.phoneNo = '';
-    return;
-  } else if (!regexEmail.test(userObj.email)) {
-    alert('That is not a valid email');
-    userObj.email = '';
-    return;
-  } else {
-    tbodyUsersEl.insertAdjacentHTML(
-      'beforeend',
-      `
-        <tr>
-            <td>${userObj.name}</td>
-            <td>${userObj.phoneNo}</td>
-            <td>${userObj.email}</td>
-            
-        </tr>
-    `
-    );
-  }
+const resetName = () => {
+  fullNameEl.value = '';
 };
 
-const checkForDuplicates = (obj1, obj2) => {
-  if (obj1.phoneNo === obj2.phoneNo || obj1.email === obj2.email) {
-    return true;
-  } else {
-    return false;
-  }
+const resetNumber = () => {
+  phoneNumberEl.value = '';
+};
+
+const resetEmail = () => {
+  emailEl.value = '';
 };
 
 const userObjectHandler = () => {
-  const user = {
-    name: fullNameEl.value,
-    phoneNo: phoneNumberEl.value,
-    email: emailEl.value,
-  };
+  const user = new User(fullNameEl.value, phoneNumberEl.value, emailEl.value);
   const isDuplicate = users.some((singleUser) =>
-    checkForDuplicates(singleUser, user)
+    user.checkForDuplicates(singleUser, user)
   );
-  if (isDuplicate) {
-    alert('Person already exists!');
-    resetForm();
-    return;
-  } else {
-    addAndValidateUser(user);
+  if (user.validate()) {
     users.push(user);
   }
-  resetForm();
+  if (isDuplicate && users.length > 1) {
+    alert('User already exists');
+    const duplicatePerson = tbodyUsersEl.lastElementChild;
+    tbodyUsersEl.removeChild(duplicatePerson);
+    users.pop(user);
+  }
+  console.log(users);
 };
 
 submitBtnEl.addEventListener('click', userObjectHandler);
