@@ -1,12 +1,18 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 form {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   height: 35vh;
   width: 40vw;
   background: grey;
@@ -15,28 +21,29 @@ form {
   border-radius: 1rem;
 }
 
-label {
+form label {
   padding: 0.5rem 0;
   width: 85%;
   margin: 0 auto;
 }
 
-input {
+form input {
   margin: 0 auto;
   width: 85%;
   padding: 0.2rem;
 }
 
-#name {
+form #name {
   text-transform: capitalize;
 }
 
-button {
+form button {
   width: auto;
-  align-self: flex-end;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
   padding: 0.5rem 2rem;
   margin: 0.5rem 3rem 0 0;
-  background: white;
+  background: #fff;
   font-size: 1rem;
   border: none;
 }
@@ -48,8 +55,12 @@ table {
   left: 50%;
 }
 
-th {
+table th {
   text-align: left;
+}
+
+table td:nth-of-type(1) {
+  text-transform: capitalize;
 }
 
 table,
@@ -63,7 +74,4 @@ th,
 td {
   padding: 5px;
 }
-
-td:nth-of-type(1) {
-  text-transform: capitalize;
-}
+/*# sourceMappingURL=style.css.map */

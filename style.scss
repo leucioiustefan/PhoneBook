@@ -1,0 +1,66 @@
+$formColor: grey;
+$buttonColor: #fff;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  height: 35vh;
+  width: 40vw;
+  background: $formColor;
+  position: absolute;
+  top: 30%;
+  border-radius: 1rem;
+  label {
+    padding: 0.5rem 0;
+    width: 85%;
+    margin: 0 auto;
+  }
+  input {
+    margin: 0 auto;
+    width: 85%;
+    padding: 0.2rem;
+  }
+  #name {
+    text-transform: capitalize;
+  }
+  button {
+    width: auto;
+    align-self: flex-end;
+    padding: 0.5rem 2rem;
+    margin: 0.5rem 3rem 0 0;
+    background: $buttonColor;
+    font-size: 1rem;
+    border: none;
+  }
+}
+
+table {
+  width: 40vw;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  th {
+    text-align: left;
+  }
+  td:nth-of-type(1) {
+    text-transform: capitalize;
+  }
+}
+
+table,
+th,
+td {
+  border: 1px solid #000;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 5px;
+}
