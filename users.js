@@ -47,16 +47,6 @@ class Users {
     }
     return this.isValidUser;
   }
-
-  delete() {
-    const userEl = tbodyUsersEl.querySelectorAll('tr');
-    for (let i = 0; i < userEl.length; i++) {
-      const deleteBtn = userEl[i].querySelector('.delete');
-      deleteBtn.addEventListener('click', () => {
-        tbodyUsersEl.removeChild(userEl[i]);
-      });
-    }
-  }
 }
 
 class User extends Users {
@@ -82,6 +72,18 @@ class User extends Users {
     if (this.validate()) {
       this._renderUser();
       return true;
+    }
+  }
+
+  deleteUser() {
+    for (let i = 0; i < users.length; i++) {
+      const usersEl = tbodyUsersEl.querySelectorAll('tr');
+      const deleteBtn = usersEl[i].querySelector('.delete');
+      deleteBtn.addEventListener('click', () => {
+        tbodyUsersEl.appendChild(usersEl[i]);
+        tbodyUsersEl.removeChild(usersEl[i]);
+        users.pop();
+      });
     }
   }
 }
