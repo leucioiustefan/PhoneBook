@@ -34,6 +34,7 @@ const userObjectHandler = () => {
   );
   if (user.renderUserOnScreen()) {
     users.push(user);
+    resetForm();
   }
   if (isDuplicate && users.length > 0) {
     alert('User already exists');
@@ -44,7 +45,6 @@ const userObjectHandler = () => {
   if (!isDuplicate) {
     user.deleteUser();
   }
-  resetForm();
 };
 
 submitBtnEl.addEventListener('click', userObjectHandler);
