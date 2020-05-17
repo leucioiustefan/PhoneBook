@@ -44,7 +44,7 @@ const userObjectHandler = () => {
   if (!isDuplicate) {
     user.deleteUser();
   }
-  console.log(users);
+  resetForm();
 };
 
 submitBtnEl.addEventListener('click', userObjectHandler);
