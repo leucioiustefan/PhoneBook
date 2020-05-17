@@ -54,14 +54,25 @@ class Users {
       resetEmail();
       return;
     } else {
-      this._renderUser();
       this.isValidUser = true;
     }
     return this.isValidUser;
   }
+
+  delete() {
+    const userEl = tbodyUsersEl.querySelectorAll('tr');
+    for (let i = 0; i < userEl.length; i++) {
+      const deleteBtn = userEl[i].querySelector('.delete');
+      deleteBtn.addEventListener('click', () => {
+        tbodyUsersEl.removeChild(userEl[i]);
+      });
+    }
+  }
 }
 
 class User extends Users {
+  isValidUser = false;
+
   constructor(name, phone, email) {
     super(name, phone, email);
   }
@@ -75,6 +86,13 @@ class User extends Users {
       return true;
     } else {
       return false;
+    }
+  }
+
+  renderUserOnScreen() {
+    if (this.validate()) {
+      this._renderUser();
+      return true;
     }
   }
 }
@@ -102,7 +120,7 @@ const userObjectHandler = () => {
   const isDuplicate = users.some((singleUser) =>
     user.checkForDuplicates(singleUser, user)
   );
-  if (user.validate()) {
+  if (user.renderUserOnScreen()) {
     users.push(user);
   }
   if (isDuplicate && users.length > 1) {
