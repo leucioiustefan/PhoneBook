@@ -86,4 +86,8 @@ class User extends Users {
       });
     }
   }
+
+  editUser() {
+    //to be added
+  }
 }
