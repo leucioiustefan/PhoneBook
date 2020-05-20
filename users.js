@@ -76,8 +76,8 @@ class User extends Users {
   }
 
   deleteUser() {
+    const usersEl = tbodyUsersEl.querySelectorAll('tr');
     for (let i = 0; i < users.length; i++) {
-      const usersEl = tbodyUsersEl.querySelectorAll('tr');
       const deleteBtn = usersEl[i].querySelector('.delete');
       deleteBtn.addEventListener('click', () => {
         tbodyUsersEl.appendChild(usersEl[i]);
@@ -87,7 +87,12 @@ class User extends Users {
     }
   }
 
-  editUser() {
-    //to be added
-  }
+  // editUser() {
+  //   const usersEl = tbodyUsersEl.querySelectorAll('tr');
+  //   for (let i = 0; i < users.length; i++) {
+  //     const userData = usersEl[i].querySelectorAll('td');
+  //     const editBtn = usersEl[i].querySelector('.edit');
+  //     for (let j = 0; j < userData.length; j++) {}
+  //   }
+  // }
 }
