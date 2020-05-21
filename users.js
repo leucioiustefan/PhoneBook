@@ -1,98 +1,78 @@
 class Users {
-  isValidUser = false;
-
-  constructor(name, phone, email) {
+  constructor(name, number, email) {
     this.name = name;
-    this.phone = phone;
+    this.number = number;
     this.email = email;
   }
+}
 
-  _renderUser() {
-    tbodyUsersEl.insertAdjacentHTML(
-      'beforeend',
-      `
-        <tr>
-            <td>${this.name}</td>
-            <td>${this.phone}</td>
-            <td>${this.email}</td>
-            <td><a href="#" class="edit">Edit</a></td>
-            <td><a href="#" class="delete">Delete</a></td>
-        </tr>
-    `
-    );
+class User {
+  constructor(user) {
+    this.user = user;
   }
 
-  validate() {
-    if (
-      this.name.trim() === '' ||
-      this.email.trim() === '' ||
-      this.phone.trim() === ''
-    ) {
+  validateUserInput(name, phone, email) {
+    let isValid = false;
+    if (name.trim() === '' || email.trim() === '' || phone.trim() === '') {
       alert('Fields cannot be empty!');
       return;
-    } else if (!regexName.test(this.name)) {
+    } else if (!regexName.test(name)) {
       alert('Please provide a valid name!');
       resetName();
       return;
-    } else if (!regexNumber.test(this.phone)) {
+    } else if (!regexNumber.test(phone)) {
       alert('Please provide a valid phone number!');
       resetNumber();
       return;
-    } else if (!regexEmail.test(this.email)) {
+    } else if (!regexEmail.test(email)) {
       alert('Please provide a valid email!');
       resetEmail();
       return;
     } else {
-      this.isValidUser = true;
+      isValid = true;
     }
-    return this.isValidUser;
+    return isValid;
+  }
+
+  renderSingleUser() {
+    const userData = document.createElement('tr');
+    userData.insertAdjacentHTML(
+      'beforeend',
+      `
+              <td>${this.user.name}</td>
+              <td>${this.user.number}</td>
+              <td>${this.user.email}</td>
+              <td><a href="#" class="edit">Edit</a></td>
+              <td><a href="#" class="delete">Delete</a></td>
+      `
+    );
+    const deleteBtn = userData.querySelector('.delete');
+    deleteBtn.addEventListener('click', this.deleteUser.bind(this, userData));
+    return userData;
+  }
+
+  deleteUser(user) {
+    tbodyUsersEl.removeChild(user);
   }
 }
 
-class User extends Users {
-  isValidUser = false;
+class UsersList {
+  user = new Users(fullNameEl.value, phoneNumberEl.value, emailEl.value);
 
-  constructor(name, phone, email) {
-    super(name, phone, email);
-  }
-
-  checkForDuplicates(obj1, obj2) {
+  render() {
+    const userObject = new User(this.user);
     if (
-      obj1.name === obj2.name ||
-      obj1.email === obj2.email ||
-      obj1.phone === obj2.phone
+      userObject.validateUserInput(
+        this.user.name,
+        this.user.number,
+        this.user.email
+      )
     ) {
-      return true;
+      const userEl = userObject.renderSingleUser();
+      tbodyUsersEl.append(userEl);
+      users.push(this.user);
     } else {
-      return false;
+      return;
     }
   }
-
-  renderUserOnScreen() {
-    if (this.validate()) {
-      this._renderUser();
-      return true;
-    }
-  }
-
-  deleteUser() {
-    const usersEl = tbodyUsersEl.querySelectorAll('tr');
-    for (let i = 0; i < users.length; i++) {
-      const deleteBtn = usersEl[i].querySelector('.delete');
-      deleteBtn.addEventListener('click', () => {
-        tbodyUsersEl.appendChild(usersEl[i]);
-        tbodyUsersEl.removeChild(usersEl[i]);
-        users.pop();
-      });
-    }
-  }
-
-  // editUser() {
-  //   const usersEl = tbodyUsersEl.querySelectorAll('tr');
-  //   for (let i = 0; i < users.length; i++) {
-  //     const userData = usersEl[i].querySelectorAll('td');
-  //     const editBtn = usersEl[i].querySelector('.edit');
-  //     for (let j = 0; j < userData.length; j++) {}
-  //   }
-  // }
 }

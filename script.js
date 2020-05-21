@@ -7,7 +7,7 @@ const formEl = document.querySelector('form');
 const regexName = /^[a-zA-Z]+ [a-zA-Z]+$/;
 const regexEmail = /\S+@\S+\.\S+/;
 const regexNumber = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
-let users = [];
+const users = [];
 
 const resetForm = () => {
   fullNameEl.value = '';
@@ -27,27 +27,10 @@ const resetEmail = () => {
   emailEl.value = '';
 };
 
-const userObjectHandler = () => {
-  const user = new User(fullNameEl.value, phoneNumberEl.value, emailEl.value);
-  const isDuplicate = users.some((singleUser) =>
-    user.checkForDuplicates(singleUser, user)
-  );
-  if (user.renderUserOnScreen()) {
-    users.push(user);
-    resetForm();
-  }
-  if (isDuplicate && users.length > 0) {
-    alert('User already exists');
-    const duplicatePerson = tbodyUsersEl.lastElementChild;
-    tbodyUsersEl.removeChild(duplicatePerson);
-    users.pop();
-  }
-  if (!isDuplicate) {
-    user.deleteUser();
-  }
-};
-
-submitBtnEl.addEventListener('click', userObjectHandler);
+submitBtnEl.addEventListener('click', () => {
+  const user = new UsersList();
+  user.render();
+});
 formEl.addEventListener('submit', (e) => {
   e.preventDefault();
 });
