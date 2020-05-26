@@ -46,14 +46,20 @@ class User {
               <td><a href="#" class="delete">Delete</a></td>
       `
     );
+    // const editBtn = userData.querySelector('.edit');
     const deleteBtn = userData.querySelector('.delete');
     deleteBtn.addEventListener('click', this.deleteUser.bind(this, userData));
+    // editBtn.addEventListener('click', this.editUser.bind(this, userData));
     return userData;
   }
 
   deleteUser(user) {
     tbodyUsersEl.removeChild(user);
   }
+
+  // editUser(user) {
+  //   user.innerHTML = '';
+  // }
 }
 
 class UsersList {
@@ -71,8 +77,16 @@ class UsersList {
       const userEl = userObject.renderSingleUser();
       tbodyUsersEl.append(userEl);
       users.push(this.user);
+      resetForm();
     } else {
       return;
     }
+  }
+}
+
+class CreateUser {
+  static initializeUser() {
+    const user = new UsersList();
+    user.render();
   }
 }

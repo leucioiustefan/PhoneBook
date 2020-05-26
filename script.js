@@ -28,8 +28,7 @@ const resetEmail = () => {
 };
 
 submitBtnEl.addEventListener('click', () => {
-  const user = new UsersList();
-  user.render();
+  CreateUser.initializeUser();
 });
 formEl.addEventListener('submit', (e) => {
   e.preventDefault();
