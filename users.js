@@ -48,12 +48,12 @@ class User {
     );
     // const editBtn = userData.querySelector('.edit');
     const deleteBtn = userData.querySelector('.delete');
-    deleteBtn.addEventListener('click', this.deleteUser.bind(this, userData));
+    deleteBtn.addEventListener('click', () => this.deleteUserHandler(userData));
     // editBtn.addEventListener('click', this.editUser.bind(this, userData));
     return userData;
   }
 
-  deleteUser(user) {
+  deleteUserHandler(user) {
     tbodyUsersEl.removeChild(user);
   }
 
