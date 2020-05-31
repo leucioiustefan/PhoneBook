@@ -52,7 +52,8 @@ form {
     width: 85%;
     padding: 0.2rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 1rem;
     &:focus {
       outline: none;
     }
@@ -86,6 +87,7 @@ form {
 }
 
 table {
+  background: $formColor;
   width: 40vw;
   position: absolute;
   top: 30%;
@@ -104,6 +106,7 @@ table {
     @include tableBorder;
     padding: 5px;
     font-size: 1rem;
+    font-weight: 500;
     &:nth-of-type(1) {
       text-transform: capitalize;
     }

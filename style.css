@@ -51,7 +51,8 @@ form input {
   width: 85%;
   padding: 0.2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 form input:focus {
@@ -91,6 +92,7 @@ form .form-actions button:focus {
 }
 
 table {
+  background: #202020;
   width: 40vw;
   position: absolute;
   top: 30%;
@@ -115,6 +117,7 @@ table td {
   border-collapse: collapse;
   padding: 5px;
   font-size: 1rem;
+  font-weight: 500;
 }
 
 table td:nth-of-type(1) {
