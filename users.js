@@ -58,7 +58,10 @@ class User {
   }
 
   // editUser(user) {
-  //   user.innerHTML = '';
+  //   fullNameEl.value = this.user.name;
+  //   phoneNumberEl.value = this.user.number;
+  //   emailEl.value = this.user.email;
+  //   user.className = 'highlighted';
   // }
 }
 
@@ -76,7 +79,6 @@ class UsersList {
     ) {
       const userEl = userObject.renderSingleUser();
       tbodyUsersEl.append(userEl);
-      users.push(this.user);
       resetForm();
     } else {
       return;
