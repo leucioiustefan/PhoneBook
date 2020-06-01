@@ -11,6 +11,17 @@ html {
   background-size: cover;
 }
 
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  height: 100vh;
+  width: 100vw;
+  z-index: 10;
+  display: none;
+}
+
 header {
   text-align: center;
   font-size: 1.5rem;
@@ -33,6 +44,7 @@ form {
   position: absolute;
   top: 30%;
   border-radius: 1rem;
+  z-index: 20;
 }
 
 form label {
@@ -74,7 +86,7 @@ form .form-actions {
           justify-content: flex-end;
 }
 
-form .form-actions button {
+form .form-actions #submit {
   display: inline-block;
   margin-top: 0.5rem;
   padding: 0.5rem 1.6rem;
@@ -87,7 +99,25 @@ form .form-actions button {
   background: #a76c00;
 }
 
-form .form-actions button:focus {
+form .form-actions #submit:focus {
+  outline: none;
+}
+
+form .form-actions #confirm {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1.6rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  border-radius: 14px;
+  border: none;
+  color: #25f6fd;
+  background: #a76c00;
+  display: none;
+}
+
+form .form-actions #confirm:focus {
   outline: none;
 }
 
@@ -130,7 +160,19 @@ table a {
 }
 
 .highlighted {
-  background: #000;
+  background: #ffffff;
   z-index: 100;
+}
+
+.backdrop-visible {
+  display: block;
+}
+
+.confirm-visible {
+  display: block !important;
+}
+
+.submit-notVisible {
+  display: none !important;
 }
 /*# sourceMappingURL=style.css.map */

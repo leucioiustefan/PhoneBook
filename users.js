@@ -46,23 +46,68 @@ class User {
               <td><a href="#" class="delete">Delete</a></td>
       `
     );
-    // const editBtn = userData.querySelector('.edit');
+    const editBtn = userData.querySelector('.edit');
     const deleteBtn = userData.querySelector('.delete');
     deleteBtn.addEventListener('click', () => this.deleteUserHandler(userData));
-    // editBtn.addEventListener('click', this.editUser.bind(this, userData));
+    editBtn.addEventListener('click', () => this.editUser(userData));
     return userData;
   }
 
   deleteUserHandler(user) {
-    tbodyUsersEl.removeChild(user);
+    const confirmation = confirm('Are you sure you want to delete?');
+    if (confirmation) {
+      tbodyUsersEl.removeChild(user);
+    } else {
+      return;
+    }
   }
 
-  // editUser(user) {
-  //   fullNameEl.value = this.user.name;
-  //   phoneNumberEl.value = this.user.number;
-  //   emailEl.value = this.user.email;
-  //   user.className = 'highlighted';
-  // }
+  confirmEditHandler(user) {
+    const confirmation = confirm('Do you want to edit user?');
+    if (confirmation) {
+      const highlightedData = user.querySelectorAll('td');
+      for (let i = 0; i < highlightedData.length - 2; i++) {
+        highlightedData[i].classList.toggle('highlighted');
+      }
+      highlightedData[0].innerHTML = `${fullNameEl.value}`;
+      highlightedData[1].innerHTML = `${phoneNumberEl.value}`;
+      highlightedData[2].innerHTML = `${emailEl.value}`;
+
+      backdropEl.classList.toggle('backdrop-visible');
+      confirmBtnEl.classList.toggle('confirm-visible');
+      submitBtnEl.classList.toggle('submit-notVisible');
+      resetForm();
+    } else {
+      return;
+    }
+  }
+
+  editUser(user) {
+    const highlightedData = user.querySelectorAll('td');
+    for (let i = 0; i < highlightedData.length - 2; i++) {
+      highlightedData[i].style.position = 'relative';
+      highlightedData[i].classList.toggle('highlighted');
+    }
+    fullNameEl.value = this.user.name;
+    phoneNumberEl.value = this.user.number;
+    emailEl.value = this.user.email;
+    backdropEl.classList.toggle('backdrop-visible');
+    confirmBtnEl.classList.toggle('confirm-visible');
+    submitBtnEl.classList.toggle('submit-notVisible');
+    confirmBtnEl.addEventListener('click', () => {
+      if (
+        this.validateUserInput(
+          fullNameEl.value,
+          phoneNumberEl.value,
+          emailEl.value
+        )
+      ) {
+        this.confirmEditHandler(user);
+      } else {
+        return;
+      }
+    });
+  }
 }
 
 class UsersList {

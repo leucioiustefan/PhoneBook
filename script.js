@@ -1,7 +1,9 @@
 const tbodyUsersEl = document.getElementById('users');
 const submitBtnEl = document.getElementById('submit');
+const confirmBtnEl = document.getElementById('confirm');
 const fullNameEl = document.getElementById('name');
 const phoneNumberEl = document.getElementById('number');
+const backdropEl = document.querySelector('.backdrop');
 const emailEl = document.getElementById('email');
 const formEl = document.querySelector('form');
 const regexName = /^[a-zA-Z]+ [a-zA-Z]+$/;
