@@ -38,7 +38,7 @@ form {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: 35vh;
+  height: 40vh;
   width: 40vw;
   background: #202020;
   position: absolute;
